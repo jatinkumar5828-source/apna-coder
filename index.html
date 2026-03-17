@@ -170,18 +170,23 @@
         </div>
 
         <div class="card-container">
-            <svg id="cap-icon" style="display: none;">
-                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z" fill="currentColor"/>
+            
+            <svg style="display: none;" aria-hidden="true">
+                <defs>
+                    <symbol id="cap-icon" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z"/>
+                    </symbol>
+                </defs>
             </svg>
 
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-alpha"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Alpha</h2><p>DSA only</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-delta"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Delta</h2><p>Web Development only</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-alphaplus"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Alpha Plus</h2><p>DSA + Aptitude</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-sigma"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Sigma</h2><p>DSA + Web Development + Aptitude</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-prime"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Prime</h2><p>AI/ML only</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-sigmaprime"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Sigma Prime</h2><p>DSA + Web Development + Aptitude +...</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-alpha"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Aptitude</h2><p>Aptitude preparation only</p></div><div class="arrow-btn">›</div></div>
-            <div class="card" onclick="triggerLoader()"><div class="icon bg-delta"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Others</h2><p>All other batches</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-alpha"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Alpha</h2><p>DSA only</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-delta"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Delta</h2><p>Web Development only</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-alphaplus"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Alpha Plus</h2><p>DSA + Aptitude</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-sigma"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Sigma</h2><p>DSA + Web Development + Aptitude</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-prime"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Prime</h2><p>AI/ML only</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-sigmaprime"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Sigma Prime</h2><p>DSA + Web Development + Aptitude +...</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-alpha"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Aptitude</h2><p>Aptitude preparation only</p></div><div class="arrow-btn">›</div></div>
+            <div class="card" onclick="triggerLoader()"><div class="icon bg-delta"><svg width="24" height="24"><use href="#cap-icon"></use></svg></div><div class="card-text"><h2>Others</h2><p>All other batches</p></div><div class="arrow-btn">›</div></div>
         </div>
     </div>
 
@@ -201,27 +206,21 @@
             }, 3500); 
         });
 
-        // --- 2. Persistent Timer Logic (NEW) ---
+        // --- 2. Persistent Timer Logic ---
         const STORAGE_KEY = 'apnaCoderEndTime';
         let targetTime = localStorage.getItem(STORAGE_KEY);
 
-        // If there is no saved target time, create one for 24 hours from right now
         if (!targetTime) {
-            // new Date().getTime() gets current time in milliseconds. 
-            // 24 hours * 60 mins * 60 secs * 1000 ms = 86,400,000 milliseconds
             targetTime = new Date().getTime() + (24 * 60 * 60 * 1000);
             localStorage.setItem(STORAGE_KEY, targetTime);
         } else {
-            // Convert the saved string back into a usable number
             targetTime = parseInt(targetTime);
         }
 
         function updateTimer() {
             const now = new Date().getTime();
-            // Calculate seconds remaining between now and the target end time
             let timeRemaining = Math.floor((targetTime - now) / 1000);
 
-            // Stop the timer exactly at 00:00:00 so it doesn't go into negative numbers
             if (timeRemaining < 0) {
                 timeRemaining = 0;
             }
